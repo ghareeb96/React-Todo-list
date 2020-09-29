@@ -1,0 +1,50 @@
+.todo-list {
+    width: 50%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-list-header {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.input-bar {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    height: 100%;
+}
+
+#todo-input {
+    height: 100%;
+    width: 90%;
+}
+
+.add-btn {
+    width: 10%;
+}
+
+.filter-bar {
+    width: 25%;
+    height: 100%;
+}
+
+#filter {
+    width: 100%;
+    height: 100%;
+}
+
+.todos {
+    height: 80%;
+    width: 100%;
+    background-color: white;
+    margin: auto;
+    overflow: auto;
+}
