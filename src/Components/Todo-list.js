@@ -13,7 +13,8 @@ export class Todolist extends Component {
             todos: [...prev.todos,
             {
                 task: this.state.inputText,
-                completed: false
+                completed: false,
+                id: Math.random() * 100
             }],
             inputText: ""
         }))
@@ -25,6 +26,7 @@ export class Todolist extends Component {
             inputText: e.target.value
         })
     }
+
     render() {
         return (
             <div className="todo-list">
@@ -56,7 +58,13 @@ export class Todolist extends Component {
 
                 <div className="todos">
                     {this.state.todos.map((newTodo) => (
-                        <Todo task={newTodo.task} />
+                        <Todo
+                            task={newTodo.task}
+                            key={newTodo.id}
+                            // completeBtn={this.completeBtnHandler}
+                            todo={newTodo}
+                            todos={this.state.todos}
+                        />
                     ))}
 
 
