@@ -3,27 +3,53 @@ import "./Todo-list.css"
 import Todo from "./Todo"
 
 export class Todolist extends Component {
-    state = {
-        inputText: "",
-        todos: []
+    constructor() {
+        super();
+        this.state = {
+            inputText: "",
+            todos: []
+        }
+
     }
-
-    addTodo = () => {
-        this.setState((prev) => ({
-            todos: [...prev.todos,
-            {
-                task: this.state.inputText,
-                completed: false,
-                id: Math.random() * 100
-            }],
-            inputText: ""
-        }))
-    }
-
-
     handleInput = (e) => {
         this.setState({
             inputText: e.target.value
+        })
+    }
+    addTodo = () => {
+        if (this.state.inputText) {
+            this.setState((prev) => ({
+                todos: [...prev.todos,
+                {
+                    task: this.state.inputText,
+                    completed: false,
+                    id: Math.random() * 100
+                }],
+                inputText: ""
+            }))
+        }
+    }
+
+    completeHandler = (id) => {
+        this.setState({
+            todos:
+                this.state.todos.map((item) => {
+                    if (item.id === id) {
+                        // console.log(item)
+                        return {
+                            ...item, completed: !item.completed
+                        }
+                    }
+                    console.log(item)
+                    return item
+                })
+        })
+
+    }
+    deleteHandler = (id) => {
+        this.setState({
+            todos:
+                this.state.todos.filter((item) => item.id !== id)
         })
     }
 
@@ -61,9 +87,10 @@ export class Todolist extends Component {
                         <Todo
                             task={newTodo.task}
                             key={newTodo.id}
-                            // completeBtn={this.completeBtnHandler}
-                            todo={newTodo}
-                            todos={this.state.todos}
+                            id={newTodo.id}
+                            completed={newTodo.completed}
+                            completeBtn={this.completeHandler.bind(this)}
+                            deleteBtn={this.deleteHandler.bind(this)}
                         />
                     ))}
 
