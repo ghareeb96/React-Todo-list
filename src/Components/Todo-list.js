@@ -3,19 +3,25 @@ import "./Todo-list.css"
 import Todo from "./Todo"
 
 export class Todolist extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             inputText: "",
-            todos: []
+            todos: [],
+            filteredTodos: []
         }
 
+
     }
+
+
     handleInput = (e) => {
         this.setState({
             inputText: e.target.value
         })
     }
+
+
     addTodo = () => {
         if (this.state.inputText) {
             this.setState((prev) => ({
@@ -27,6 +33,7 @@ export class Todolist extends Component {
                 }],
                 inputText: ""
             }))
+
         }
     }
 
@@ -53,6 +60,36 @@ export class Todolist extends Component {
         })
     }
 
+    filterTodo = () => {
+        switch (document.getElementById("filter").value) {
+            case ("completed"): {
+                this.setState({
+                    filteredTodos: this.state.todos.filter(item => item.completed === true)
+                })
+                break;
+            }
+            case ("incompleted"): {
+                this.setState({
+                    filteredTodos: this.state.todos.filter(item => item.completed === false)
+                })
+                break;
+            }
+            default: {
+                this.setState({
+                    filteredTodos: this.state.todos
+                })
+            }
+        }
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.todos !== this.state.todos) {
+            this.filterTodo()
+        }
+    }
+
+
     render() {
         return (
             <div className="todo-list">
@@ -74,7 +111,7 @@ export class Todolist extends Component {
                     </div>
 
                     <div className="filter-bar">
-                        <select name="filter" id="filter">
+                        <select name="filter" id="filter" onChange={this.filterTodo}>
                             <option value="all">All</option>
                             <option value="completed">Completed</option>
                             <option value="incompleted">Incompleted</option>
@@ -83,7 +120,7 @@ export class Todolist extends Component {
                 </div >
 
                 <div className="todos">
-                    {this.state.todos.map((newTodo) => (
+                    {this.state.filteredTodos.map((newTodo) => (
                         <Todo
                             task={newTodo.task}
                             key={newTodo.id}
