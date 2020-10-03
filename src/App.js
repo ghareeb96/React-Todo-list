@@ -7,7 +7,7 @@ export class App extends Component {
     return (
       <div className="App">
         <div className="header">
-          <h1>Your Todo-List</h1>
+          <h1>Todo-List</h1>
         </div>
         <TodoList />
       </div>

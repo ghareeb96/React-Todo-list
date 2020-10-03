@@ -1,22 +1,58 @@
 .todo {
     display: flex;
     flex-direction: row;
-    min-height: 20%;
-    background-color: rgba(255, 255, 255, 0.5);
+    min-height: 15%;
+    background-color: rgba(255, 255, 255, 0.568);
     margin-bottom: 10px;
+    position: relative;
+    justify-content: space-between;
 }
+
+
+
+.completed,
+.incompleted {
+    position: relative;
+    transition: all 0.2s ease-out;
+}
+
+.completed::after,
+.incompleted::after {
+    transition: all 0.2s ease-out;
+
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 100%;
+    top: 0;
+    left: 3px;
+}
+
+.completed::after {
+    background-color: rgba(7, 83, 0, 0.76)
+}
+
+.incompleted::after {
+    background-color: rgba(128, 5, 5, 0.74)
+}
+
 
 .task-description {
     width: 88%;
     display: flex;
     align-items: center;
-    padding: 0 1rem;
+    word-wrap: break-word;
+    overflow: hidden;
+    margin-right: 5%;
+    margin-left: 15px;
+    text-align: justify;
 }
 
 .task-btns {
     display: flex;
     flex-direction: column;
-    width: 12%;
+    width: auto;
+    margin-right: 10px;
 }
 
 .task-btns button {

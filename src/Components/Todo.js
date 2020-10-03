@@ -3,13 +3,7 @@ import "./Todo.css"
 
 export class Todo extends Component {
 
-    // state = {
-    //     todo: {
-    //         task: this.props.task,
-    //         id: this.props.id,
-    //         completed: this.props.completed
-    //     }
-    // }
+
     completeBtnHandler = () => {
         this.props.completeBtn(this.props.id)
     }
@@ -25,12 +19,12 @@ export class Todo extends Component {
                 </div>
                 <div className="task-btns">
                     <button
-                        className="completed"
+                        className="completeBtn"
                         onClick={this.completeBtnHandler.bind(this)}>
-                        <i className="far fa-check-square"></i>
+                        <i className={this.props.completed ? "fas fa-times" : "fas fa-check"}></i>
                     </button>
                     <button
-                        className="delete"
+                        className="deleteBtn"
                         onClick={this.deleteBtnHandler.bind(this)}>
                         <i className="fas fa-trash-alt"></i>
                     </button>

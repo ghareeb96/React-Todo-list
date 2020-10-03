@@ -13,7 +13,19 @@ export class Todolist extends Component {
 
 
     }
+    saveTodos = () => {
+        localStorage.setItem("todos", JSON.stringify(this.state.todos))
+    }
 
+    getTodos = () => {
+        if (localStorage.getItem("todos") === null) {
+            localStorage.setItem("todos", JSON.stringify([]))
+        } else {
+            this.setState({
+                todos: JSON.parse(localStorage.getItem(("todos")))
+            })
+        }
+    }
 
     handleInput = (e) => {
         this.setState({
@@ -23,7 +35,7 @@ export class Todolist extends Component {
 
 
     addTodo = () => {
-        if (this.state.inputText) {
+        if ((this.state.inputText).trim()) {
             this.setState((prev) => ({
                 todos: [...prev.todos,
                 {
@@ -86,11 +98,29 @@ export class Todolist extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.todos !== this.state.todos) {
             this.filterTodo()
+            this.saveTodos()
+        }
+    }
+    componentDidMount() {
+        if (this.state.todos !== this.state.filteredTodos) {
+            this.getTodos();
+            this.filterTodo()
+
         }
     }
 
 
     render() {
+        const todos = this.state.filteredTodos.map((newTodo, i) => (
+            <Todo
+                task={newTodo.task}
+                key={i}
+                id={newTodo.id}
+                completed={newTodo.completed}
+                completeBtn={this.completeHandler.bind(this)}
+                deleteBtn={this.deleteHandler.bind(this)}
+            />
+        ));
         return (
             <div className="todo-list">
                 < div className="todo-list-header" >
@@ -106,11 +136,12 @@ export class Todolist extends Component {
                         <button
                             className="add-btn"
                             onClick={this.addTodo}>
-                            <i className="far fa-plus-square"></i>
+                            <i className="fas fa-plus"></i>
                         </button>
                     </div>
 
                     <div className="filter-bar">
+                        <i className="fas fa-caret-down"></i>
                         <select name="filter" id="filter" onChange={this.filterTodo}>
                             <option value="all">All</option>
                             <option value="completed">Completed</option>
@@ -120,18 +151,7 @@ export class Todolist extends Component {
                 </div >
 
                 <div className="todos">
-                    {this.state.filteredTodos.map((newTodo) => (
-                        <Todo
-                            task={newTodo.task}
-                            key={newTodo.id}
-                            id={newTodo.id}
-                            completed={newTodo.completed}
-                            completeBtn={this.completeHandler.bind(this)}
-                            deleteBtn={this.deleteHandler.bind(this)}
-                        />
-                    ))}
-
-
+                    {todos}
                 </div>
             </div>
         )
@@ -139,5 +159,3 @@ export class Todolist extends Component {
 }
 
 export default Todolist
-
-

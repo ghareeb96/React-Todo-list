@@ -1,10 +1,11 @@
 .todo-list {
     width: 50%;
-    height: 60%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .todo-list-header {
@@ -24,27 +25,78 @@
 
 #todo-input {
     height: 100%;
-    width: 90%;
+    width: 83%;
+    background: none;
+    outline: none;
+    border: 1px solid white;
+    border-right: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    border-radius: 25px 0 0 25px;
+    margin: 0;
 }
 
 .add-btn {
-    width: 10%;
+    width: 17%;
+    background: none;
+    outline: none;
+    border: 1px solid white;
+    border-left: none;
+    color: white;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 2rem;
+}
+
+.add-btn:hover {
+    background-color: white;
+    color: black;
 }
 
 .filter-bar {
     width: 25%;
     height: 100%;
+    position: relative;
 }
 
 #filter {
     width: 100%;
     height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    appearance: none;
+    color: white;
+    cursor: pointer;
+
+}
+
+.filter-bar i {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translate(-10%, -50%);
+    font-size: 1.5rem;
+    z-index: -1;
+    color: white;
+}
+
+#filter option {
+    color: black;
+
 }
 
 .todos {
     height: 80%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.247);
     margin: auto;
     overflow: auto;
+    transition: all 0.3s ease-out;
+
 }
