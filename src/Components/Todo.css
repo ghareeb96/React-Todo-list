@@ -29,7 +29,7 @@
 }
 
 .completed::after {
-    background-color: rgba(7, 83, 0, 0.76)
+    background-color: rgba(31, 107, 1, 0.76)
 }
 
 .incompleted::after {
